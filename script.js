@@ -22,13 +22,14 @@ import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/
 // La apiKey Firebase est publique par nature (protégée par les règles
 // Firestore, pas par le secret) — voir plan technique section 1.2.
 const firebaseConfig = {
-  apiKey: "AIzaSyCPGgtXoDUycykLaTSee0S0yY0tkeJpqKI",
-  authDomain: "data-com-a94a8.firebaseapp.com",
-  databaseURL: "https://data-com-a94a8-default-rtdb.firebaseio.com",
-  projectId: "data-com-a94a8",
-  storageBucket: "data-com-a94a8.firebasestorage.app",
-  messagingSenderId: "276904640935",
-  appId: "1:276904640935:web:9cd805aeba6c34c767f682",
+  apiKey: "AIzaSyCGsq9aN-DKPuzsoBFAgEdfNfrzb-__RRo",
+  authDomain: "jardo-26efc.firebaseapp.com",
+  databaseURL: "https://jardo-26efc-default-rtdb.firebaseio.com",
+  projectId: "jardo-26efc",
+  storageBucket: "jardo-26efc.firebasestorage.app",
+  messagingSenderId: "1062237964287",
+  appId: "1:1062237964287:web:fef58a549cd08d6c0a89ca",
+  measurementId: "G-4DB71EL12P"
 };
 
 const app = initializeApp(firebaseConfig);
