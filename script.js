@@ -5,11 +5,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getAuth,
-  signInAnonymously,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
   getFirestore,
   collection,
   doc,
@@ -37,7 +32,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 const functions = getFunctions(app);
 const askAella = httpsCallable(functions, "askAella");
@@ -52,7 +46,18 @@ const statusDot = document.getElementById("statusDot");
 const statusLabel = document.getElementById("statusLabel");
 const newConvBtn = document.getElementById("newConvBtn");
 
-let currentUser = null;
+// Pas d'auth : on identifie juste l'appareil avec un id stocké localement,
+// pour retrouver les mêmes conversations d'une visite à l'autre.
+function getLocalUserId() {
+  let id = localStorage.getItem("aella_local_id");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("aella_local_id", id);
+  }
+  return id;
+}
+
+const currentUser = { uid: getLocalUserId() };
 let conversationId = null;
 let unsubscribeMessages = null;
 
@@ -62,20 +67,8 @@ function setStatus(state, label) {
   statusLabel.textContent = label;
 }
 
-setStatus("connecting", "Connexion…");
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    currentUser = user;
-    setStatus("online", "En ligne");
-    startConversation();
-  }
-});
-
-signInAnonymously(auth).catch((err) => {
-  console.error("Auth error:", err);
-  setStatus("error", "Connexion impossible");
-});
+setStatus("online", "En ligne");
+startConversation();
 
 // ===== Conversation =====
 async function startConversation() {
