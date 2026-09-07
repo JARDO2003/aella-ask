@@ -29,7 +29,6 @@ const firebaseConfig = {
   storageBucket: "jardo-26efc.firebasestorage.app",
   messagingSenderId: "1062237964287",
   appId: "1:1062237964287:web:fef58a549cd08d6c0a89ca",
-  measurementId: "G-4DB71EL12P"
 };
 
 const app = initializeApp(firebaseConfig);
